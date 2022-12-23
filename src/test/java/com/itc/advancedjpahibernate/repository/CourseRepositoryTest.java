@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,8 +22,15 @@ class CourseRepositoryTest {
 
     @Test
     void findById_basic() {
-
         Course course = repository.findById(10001L);
         assertEquals("JPA and Hibernate", course.getName());
     }
+
+    @Test
+    @DirtiesContext // untuk memastikan data sebenarnya tidak berubah
+    void deleteById_basic() {
+        repository.deleteById(10003L);
+        assertNull(repository.findById(10003L));
+    }
+
 }

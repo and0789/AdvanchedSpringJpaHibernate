@@ -26,8 +26,12 @@ public class AdvancedJpaHibernateApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Course course = repository.findById(10001L);
 
+
+        // cek find by id
         logger.info("Course 10001 -> {} ", course);
 
+        // delete by id
+        repository.deleteById(10002L);
 
     }
 }
