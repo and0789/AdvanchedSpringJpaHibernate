@@ -48,4 +48,10 @@ class CourseRepositoryTest {
         Course course1 = repository.findById(10001L);
         assertEquals("JPA and Hibernate - Update", course1.getName());
     }
+
+    @Test
+    @DirtiesContext
+    void playWithEntityManager_basic() {
+        repository.playWithEntityManager();
+    }
 }

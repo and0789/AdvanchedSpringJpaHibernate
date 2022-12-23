@@ -22,7 +22,7 @@ public class CourseRepository {
         entityManager.remove(course);
     }
 
-    public Course save (Course course) {
+    public Course save(Course course) {
         if (course.getId() == null) {
             // insert
             entityManager.persist(course);
@@ -31,5 +31,27 @@ public class CourseRepository {
             entityManager.merge(course);
         }
         return course;
+    }
+
+    public void playWithEntityManager() {
+        Course course1 = new Course("Web Service");
+        entityManager.persist(course1);
+
+        Course course2 = new Course("Angular JS");
+        entityManager.persist(course2);
+
+        entityManager.flush();
+
+        course1.setName("Web Server - Updated");
+        course2.setName("Angular JS - Updated");
+
+        entityManager.refresh(course1);
+
+        entityManager.flush();
+
+
+//        entityManager.detach(course2);
+//        entityManager.clear();
+
     }
 }
