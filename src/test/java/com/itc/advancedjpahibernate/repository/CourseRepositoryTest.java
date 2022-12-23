@@ -33,4 +33,19 @@ class CourseRepositoryTest {
         assertNull(repository.findById(10003L));
     }
 
+    @Test
+    @DirtiesContext // untuk memastikan data sebenarnya tidak berubah
+    void save_basic() {
+        // get a course
+        Course course = repository.findById(10001L);
+        assertEquals("JPA and Hibernate", course.getName());
+
+        // update detail
+        course.setName("JPA and Hibernate - Update");
+        repository.save(course);
+
+        // check the value
+        Course course1 = repository.findById(10001L);
+        assertEquals("JPA and Hibernate - Update", course1.getName());
+    }
 }

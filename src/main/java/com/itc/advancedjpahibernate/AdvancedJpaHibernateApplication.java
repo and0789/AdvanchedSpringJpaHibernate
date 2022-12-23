@@ -33,5 +33,7 @@ public class AdvancedJpaHibernateApplication implements CommandLineRunner {
         // delete by id
         repository.deleteById(10002L);
 
+        repository.save(new Course("Microservice Basic"));
+
     }
 }
